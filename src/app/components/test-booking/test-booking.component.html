@@ -1,0 +1,79 @@
+<div class="container mt-5">
+    <!-- Table to display existing bookings -->
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Test Bookings</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-table [dataSource]="dataSource">
+          <!-- Appointment ID -->
+          <ng-container matColumnDef="appointmentId">
+            <mat-header-cell *matHeaderCellDef> Appointment ID </mat-header-cell>
+            <mat-cell *matCellDef="let booking">{{ booking.appointmentId }}</mat-cell>
+          </ng-container>
+  
+          <!-- User -->
+          <ng-container matColumnDef="user">
+            <mat-header-cell *matHeaderCellDef> User </mat-header-cell>
+            <mat-cell *matCellDef="let booking">{{ booking.user.name }}</mat-cell>
+          </ng-container>
+  
+          <!-- Test -->
+          <ng-container matColumnDef="test">
+            <mat-header-cell *matHeaderCellDef> Test </mat-header-cell>
+            <mat-cell *matCellDef="let booking">{{ booking.test.testName }}</mat-cell>
+          </ng-container>
+  
+          <!-- Appointment Date -->
+          <ng-container matColumnDef="appointmentDate">
+            <mat-header-cell *matHeaderCellDef> Appointment Date </mat-header-cell>
+            <mat-cell *matCellDef="let booking">{{ booking.appointmentDate | date: 'short' }}</mat-cell>
+          </ng-container>
+  
+          <!-- Status -->
+          <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+            <mat-cell *matCellDef="let booking">{{ booking.status }}</mat-cell>
+          </ng-container>
+  
+          <!-- Test Type -->
+          <ng-container matColumnDef="testType">
+            <mat-header-cell *matHeaderCellDef> Test Type </mat-header-cell>
+            <mat-cell *matCellDef="let booking">{{ booking.testType || 'Not Specified' }}</mat-cell>
+          </ng-container>
+  
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+        
+        <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 25]"></mat-paginator>
+      </mat-card-content>
+    </mat-card>
+  
+    <!-- Form to book a new test -->
+    <mat-card class="mt-4">
+      <mat-card-header>
+        <mat-card-title>Book a New Test</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form (ngSubmit)="bookTest()">
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Test Type</mat-label>
+            <input matInput [(ngModel)]="newBooking.testType" name="testType" required />
+          </mat-form-field>
+  
+          <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Appointment Date</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="newBooking.appointmentDate" name="appointmentDate" required />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+  
+          <div class="form-group">
+            <button mat-raised-button color="primary" type="submit">Book Test</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  

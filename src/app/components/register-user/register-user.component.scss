@@ -1,0 +1,22 @@
+/* Full width for form elements */
+.full-width {
+    width: 100%;
+  }
+  
+  /* Spacing for the button */
+  button {
+    margin-top: 20px;
+  }
+  
+  /* Adjust error messages */
+  mat-error {
+    font-size: 0.9rem;
+    color: red;
+  }
+  
+  /* Success/Error message styling */
+  .mat-body-2 {
+    font-size: 1rem;
+    color: green;
+  }
+  
